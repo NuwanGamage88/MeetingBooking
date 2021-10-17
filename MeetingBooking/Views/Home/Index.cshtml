@@ -1,0 +1,36 @@
+﻿@using MeetingBooking.Business.Model
+@model IEnumerable<BookingModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-md-left">
+    @*<h4 class="display-4">Booking</h4>*@
+    <h4>
+        @Html.ActionLink("NewBooking","Booking")
+        </h4>
+    <hr />
+   
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Room</th>
+            <th>Start Date Time</th>
+            <th>End Date Time</th>
+            <th>Delete</th>
+
+        </tr>
+        @foreach (BookingModel bookingModel in Model)
+        {
+            <tr>
+                <td>@bookingModel.RoomName</td>
+                <td>@bookingModel.StartDateTime</td>
+                <td>@bookingModel.EndDateTime</td>
+                <td>  
+                    @Html.ActionLink("Delete", "Delete", new { id = bookingModel.Id })  
+                </td>
+
+            </tr>
+        }
+    </table>
+
+</div>

@@ -1,0 +1,50 @@
+﻿@model MeetingBooking.Business.Model.BookingModel
+
+@{
+    ViewData["Title"] = "Booking";
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Booking">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+            @*<div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" />
+
+        </div>*@
+            <div class="form-group">
+                <label asp-for="RoomId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.RoomId, @TempData["RoomList"] as SelectList, new { onchange= "ChangeRoom(this);", @class = "form-control" })
+                @*<input asp-for="RoomId" class="form-control" />*@
+                <span asp-validation-for="RoomId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDateTime" class="control-label"></label>
+                <input asp-for="StartDateTime" asp-format="{0:dd/MM/yyyy HH:mm}" class="form-control" />
+                <span asp-validation-for="StartDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDateTime" class="control-label"></label>
+                <input asp-for="EndDateTime" asp-format="{0:dd/MM/yyyy HH:mm}" class="form-control" />
+                <span asp-validation-for="EndDateTime" class="text-danger"></span>
+            </div>
+            @*@if (!ViewData.ModelState.IsValid)
+            {
+                <span class="field-validation-error">@ViewData.ModelState["EndDateTime"].Errors[0].ErrorMessage</span>
+            }*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
